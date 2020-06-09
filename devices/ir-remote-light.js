@@ -16,7 +16,7 @@ class MiRemoteLightService {
     this.data = data;
     this.platform = platform;
     this.readydevice = false;
-    this.device = dThis.platform.getMiioDevice({address: ip, token}, this);
+    this.device = this.platform.getMiioDevice({address: ip, token}, this);
     Service = platform.HomebridgeAPI.hap.Service;
     Characteristic = platform.HomebridgeAPI.hap.Characteristic;
     this.onoffstate = false;
