@@ -11,8 +11,8 @@ MiRemoteAirConditioner = function(platform, config) {
 
 class MiRemoteAirConditionerService {
   constructor({config, platform}) {
-    const {Name, token, data, ip, MinTemperature = "16", MaxTemperature = "30", DefaultTemperature = "26"} = config;
-    this.name = Name;
+    const {name, token, data, ip, MinTemperature = "16", MaxTemperature = "30", DefaultTemperature = "26"} = config;
+    this.name = name;
     this.token = token;
     this.data = data;
     this.platform = platform;
