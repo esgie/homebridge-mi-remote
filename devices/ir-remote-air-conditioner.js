@@ -11,10 +11,11 @@ MiRemoteAirConditioner = function(platform, config) {
 
 class MiRemoteAirConditionerService {
   constructor({config, platform}) {
-    const {name, token, data, ip, MinTemperature = "16", MaxTemperature = "30", DefaultTemperature = "26"} = config;
+    const {name, token, data, ip, MinTemperature = "16", MaxTemperature = "30", DefaultTemperature = "26", keepalive = false} = config;
     this.name = name;
     this.token = token;
     this.data = data;
+    this.keepalive = keepalive;
     this.platform = platform;
     this.readydevice = false;
     this.device = platform.getMiioDevice(
@@ -36,6 +37,18 @@ class MiRemoteAirConditionerService {
     this.onoffstate = 0;
     const halfMinute = 30 * 1000;
     this.startPingingDevice(halfMinute, this.platform);
+    
+    if (this.keepalive) {
+      var self = this;
+      setInterval(function() {
+        self.platform.log.debug("IR Remote Air Conditioner keep alive");
+        self.device.call("miIO.ir_play", { freq: 38400, code: 'dummy' })
+          .then(result => { self.platform.log.debug("SUCCESS"); })
+          .catch(res => { self.platform.log.debug("FAIL"); })
+        }, 60*1000);
+      }
+    }
+    
   }
 
   startPingingDevice(period, platform) {
