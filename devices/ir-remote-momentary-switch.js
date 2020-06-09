@@ -10,8 +10,8 @@ MiRemoteMomentarySwitch = function(platform, config) {
 
 class MiRemoteMomentarySwitchService {
   constructor({config, platform, ip}) {
-    const {Name, token, data} = config;
-    this.name = Name;
+    const {name, token, data} = config;
+    this.name = name;
     this.token = token;
     this.data = data;
     this.platform = platform;
