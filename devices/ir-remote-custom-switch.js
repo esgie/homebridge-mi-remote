@@ -11,8 +11,8 @@ MiRemoteCustom = function(platform, config) {
 
 class MiRemoteCustomService {
   constructor({config, platform}) {
-    const {Name, token, data, interval = 1, ip} = config;
-    this.name = Name;
+    const {name, token, data, interval = 1, ip} = config;
+    this.name = name;
     this.token = token;
     this.data = data;
     this.interval = interval;
