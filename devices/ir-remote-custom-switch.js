@@ -16,6 +16,7 @@ class MiRemoteCustomService {
     this.token = token;
     this.data = data;
     this.interval = interval;
+    this.keepalive = keepalive;
 
     this.readydevice = false;
     this.device = platform.getMiioDevice(
