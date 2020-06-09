@@ -10,11 +10,12 @@ MiRemoteProjector = function(platform, config) {
 
 class MiRemoteProjectorService {
   constructor({config, platform}) {
-    const {name, token, data, interval = 1, ip} = config;
+    const {name, token, data, interval = 1, ip, keepalive = false} = config;
     this.name = name;
     this.token = token;
     this.data = data;
     this.interval = interval;
+    this.keepalive = keepalive;
 
     this.readydevice = false;
     this.device = platform.getMiioDevice(
@@ -30,6 +31,18 @@ class MiRemoteProjectorService {
 
     this.platform = platform;
     this.onoffstate = false;
+    
+    if (this.keepalive) {
+      var self = this;
+      setInterval(function() {
+        self.platform.log.debug("IR Remote Projector keep alive");
+        self.device.call("miIO.ir_play", { freq: 38400, code: 'dummy' })
+          .then(result => { self.platform.log.debug("SUCCESS"); })
+          .catch(res => { self.platform.log.debug("FAIL"); })
+        }, 60*1000);
+      }
+    }
+  
   }
 
   getServices() {
