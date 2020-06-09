@@ -40,7 +40,6 @@ class MiRemoteSwitchService {
           .catch(res => { self.platform.log.debug("FAIL"); })
         }, 60*1000);
       }
-    }
   
   }
 
