@@ -10,10 +10,11 @@ MiRemoteLight = function(platform, config) {
 
 class MiRemoteLightService {
   constructor({config, platform}) {
-    const {name, token, data, ip} = config;
+    const {name, token, data, ip, keepalive = false} = config;
     this.name = name;
     this.token = token;
     this.data = data;
+    this.keepalive = keepalive;
     this.platform = platform;
     this.readydevice = false;
     this.device = this.platform.getMiioDevice({address: ip, token}, this);
@@ -21,6 +22,18 @@ class MiRemoteLightService {
     Characteristic = platform.HomebridgeAPI.hap.Characteristic;
     this.onoffstate = false;
     this.brightness = 100;
+    
+    if (this.keepalive) {
+      var self = this;
+      setInterval(function() {
+        self.platform.log.debug("IR Remote Light keep alive");
+        self.device.call("miIO.ir_play", { freq: 38400, code: 'dummy' })
+          .then(result => { self.platform.log.debug("SUCCESS"); })
+          .catch(res => { self.platform.log.debug("FAIL"); })
+        }, 60*1000);
+      }
+    }
+  
   }
 
   getServices() {
