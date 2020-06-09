@@ -41,7 +41,6 @@ class MiRemoteCustomService {
           .then(result => { self.platform.log.debug("SUCCESS"); })
           .catch(res => { self.platform.log.debug("FAIL"); })
         }, 60*1000);
-      }
     }
     
   }
