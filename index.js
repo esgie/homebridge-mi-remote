@@ -57,7 +57,7 @@ MiRemotePlatform.prototype.accessories = function (callback) {
             }));
     }
     var deviceCfgs = this.config.deviceCfgs;
-
+    var hasIncludedKeepAlive = false;
     if (deviceCfgs instanceof Array) {
         for (var i = 0; i < deviceCfgs.length; i++) {
             var deviceCfg = deviceCfgs[i];
@@ -68,8 +68,14 @@ MiRemotePlatform.prototype.accessories = function (callback) {
             if (deviceCfg.name == null || deviceCfg.name == "") deviceCfg.name = deviceCfg.type;
             if (deviceCfg.data == null || deviceCfg.data == "") continue;
             
+            if (!hasIncludedKeepAlive) {
+                deviceCfg.keepalive = true;
+                hasIncludedKeepAlive = true;
+            }
+            
             switch (deviceCfg.type) {
                 case "Switch":
+                    if (has
                     LoadedAccessories.push(new MiRemoteSwitch(this, deviceCfg));
                     break;
                 case "Light":
@@ -77,7 +83,7 @@ MiRemotePlatform.prototype.accessories = function (callback) {
                     break;
                 case "Projector":
                     if (deviceCfg.data.interval != null) deviceCfg.interval = deviceCfg.data.interval;
-                    if (deviceCfg.interval == null || deviceCfg.interval == "") continue;
+                    if (deviceCfg.interval == null || deviceCfg.interval == "") deviceCfg.interval = 1;
                     LoadedAccessories.push(new MiRemoteProjector(this, deviceCfg));
                     break;
                 case "AirConditioner":
