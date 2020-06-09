@@ -66,44 +66,32 @@ MiRemotePlatform.prototype.accessories = function (callback) {
             if (deviceCfg.ip == null || deviceCfg.ip == "") deviceCfg.ip = this.config.ip;
             if (deviceCfg.token == null || deviceCfg.token == "") deviceCfg.token = this.config.token;
 
+            if (deviceCfg.name == null || deviceCfg.name == "") deviceCfg.name = deviceCfg.type;
+            if (deviceCfg.data == null || deviceCfg.data == "") continue;
+            
             switch (deviceCfg.type) {
                 case "Switch":
-                    if (deviceCfg.Name == null || deviceCfg.Name == "") deviceCfg.Name = deviceCfg.name || deviceCfg.type;
-                    if (deviceCfg.data == null || deviceCfg.data == "") continue;
                     LoadedAccessories.push(new MiRemoteSwitch(this, deviceCfg));
                     break;
                 case "Light":
-                    if (deviceCfg.Name == null || deviceCfg.Name == "") deviceCfg.Name = deviceCfg.name || deviceCfg.type;
-                    if (deviceCfg.data == null || deviceCfg.data == "") continue;
                     LoadedAccessories.push(new MiRemoteLight(this, deviceCfg));
                     break;
                 case "Projector":
-                    if (deviceCfg.Name == null || deviceCfg.Name == "") deviceCfg.Name = deviceCfg.name || deviceCfg.type;
-                    if (deviceCfg.data == null || deviceCfg.data == "") continue;
                     if (deviceCfg.data.interval != null) deviceCfg.interval = deviceCfg.data.interval;
                     if (deviceCfg.interval == null || deviceCfg.interval == "") continue;
                     LoadedAccessories.push(new MiRemoteProjector(this, deviceCfg));
                     break;
                 case "AirConditioner":
-                    if (deviceCfg.Name == null || deviceCfg.Name == "") deviceCfg.Name = deviceCfg.name || deviceCfg.type;
-                    if (deviceCfg.data == null || deviceCfg.data == "") continue;
                     if (deviceCfg.DefaultTemperature == null) if (deviceCfg.data.DefaultTemperature != null) deviceCfg.DefaultTemperature = deviceCfg.data.DefaultTemperature;
                     if (deviceCfg.MinTemperature == null) if (deviceCfg.data.MinTemperature != null) deviceCfg.MinTemperature = deviceCfg.data.MinTemperature;
                     if (deviceCfg.MaxTemperature == null) if (deviceCfg.data.MaxTemperature != null) deviceCfg.MaxTemperature = deviceCfg.data.MaxTemperature;
                     LoadedAccessories.push(new MiRemoteAirConditioner(this, deviceCfg));
                     break;
                 case "Custom":
-                    if (deviceCfg.Name == null || deviceCfg.Name == "") deviceCfg.Name = deviceCfg.name || deviceCfg.type;
-                    if (deviceCfg.data == null || deviceCfg.data == "") continue;
                     LoadedAccessories.push(new MiRemoteCustom(this, deviceCfg));
                     break;
                 case "MomentarySwitch":
-                    if (deviceCfg.Name == null || deviceCfg.Name == "") deviceCfg.Name = deviceCfg.name || deviceCfg.type;
-                    if (deviceCfg.data == null || deviceCfg.data == "") continue;
                     LoadedAccessories.push(new MiRemoteMomentarySwitch(this, deviceCfg));
-                    break;
-                case "LGAirConditioner":
-                    LoadedAccessories.push(new LGAirConditioner(this, deviceCfg));
                     break;
                 default:
                     this.log.error("Unsupported device type:", deviceCfg.type);
