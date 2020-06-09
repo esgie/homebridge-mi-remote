@@ -75,7 +75,6 @@ MiRemotePlatform.prototype.accessories = function (callback) {
             
             switch (deviceCfg.type) {
                 case "Switch":
-                    if (has
                     LoadedAccessories.push(new MiRemoteSwitch(this, deviceCfg));
                     break;
                 case "Light":
