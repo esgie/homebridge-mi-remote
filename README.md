@@ -51,11 +51,6 @@ See the [instruction](https://github.com/WestCoast5550/homebridge-mi-ir-remote/b
 * **MomentarySwitch**
 : Automatically turned off after 0.3 seconds. 
 
-### Additional supported devices
-
-* **LGAirConditioner**
-: IR remote control for [**LG Home Air Conditioners**](https://www.lg.com/my/home-air-conditioners) (Heater/Cooler). Compatible with [AKB73835317](https://www.google.com/search?q=AKB73835317) [AKB73675605](https://www.google.com/search?q=AKB73675605). Also functional on LA090HSV4 LA120HSV4 LA180HSV4 LAN090HSV4 LAN120HSV4 LAN180HSV4 LS090HSV4 LS120HSV4 LS180HSV4 LSN090HSV4 LSN120HSV4 LSN180HSV4 LSU090HSV4 LSU120HSV4 LSU180HSV4 . 
-
 ## Configuration 
 
 Example:
@@ -102,18 +97,6 @@ Example:
                 "data": {
                     
                 }
-            },
-            {
-                "type": "LGAirConditioner",
-                "name": "Thermostat",
-                "info": {
-                    "Manufacturer": "LG Electronics Inc.",
-                    "Model": "S-W096AAW",
-                    "SerialNumber": "AKB73675605"
-                },
-                "hidePlasma": false,
-                "hideJetPower": false,
-                "hideLight": true
             }
         ]
     }
