@@ -10,10 +10,11 @@ MiRemoteSwitch = function(platform, config) {
 
 class MiRemoteSwitchService {
   constructor({config, platform}) {
-    const {name, ip, token, data} = config;
+    const {name, ip, token, data, keepalive = false} = config;
     this.name = name;
     this.token = token;
     this.data = data;
+    this.keepalive = keepalive;
     this.platform = platform;
 
     this.readydevice = false;
@@ -29,6 +30,18 @@ class MiRemoteSwitchService {
     Characteristic = platform.HomebridgeAPI.hap.Characteristic;
 
     this.onoffstate = false;
+    
+    if (this.keepalive) {
+      var self = this;
+      setInterval(function() {
+        self.platform.log.debug("IR Remote Switch keep alive");
+        self.device.call("miIO.ir_play", { freq: 38400, code: 'dummy' })
+          .then(result => { self.platform.log.debug("SUCCESS"); })
+          .catch(res => { self.platform.log.debug("FAIL"); })
+        }, 60*1000);
+      }
+    }
+  
   }
 
   getServices() {
