@@ -10,8 +10,8 @@ MiRemoteLight = function(platform, config) {
 
 class MiRemoteLightService {
   constructor({config, platform}) {
-    const {Name, token, data, ip} = config;
-    this.name = Name;
+    const {name, token, data, ip} = config;
+    this.name = name;
     this.token = token;
     this.data = data;
     this.platform = platform;
