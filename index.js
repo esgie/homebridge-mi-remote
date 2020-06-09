@@ -5,7 +5,6 @@ require("./devices/ir-remote-light");
 require("./devices/ir-remote-projector");
 require("./devices/ir-remote-momentary-switch");
 require("./devices/ir-remote-air-conditioner");
-require("./devices/lg-air-conditioner");
 
 const miio = require('miio');
 var homebridgeAPI;
