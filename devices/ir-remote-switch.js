@@ -10,8 +10,8 @@ MiRemoteSwitch = function(platform, config) {
 
 class MiRemoteSwitchService {
   constructor({config, platform}) {
-    const {Name, ip, token, data} = config;
-    this.name = Name;
+    const {name, ip, token, data} = config;
+    this.name = name;
     this.token = token;
     this.data = data;
     this.platform = platform;
