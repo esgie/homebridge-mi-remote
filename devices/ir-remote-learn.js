@@ -10,8 +10,8 @@ MiRemoteLearn = function(platform, config) {
 
 class MiRemoteLearnButton {
   constructor({config, platform}) {
-    const {token, ip} = config;
-    this.name = "MiLearn";
+    const {name = "MiLearn", token, ip} = config;
+    this.name = name;
     this.token = token;
     this.platform = platform;
 
