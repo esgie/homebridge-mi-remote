@@ -30,7 +30,7 @@ class MiRemoteMomentarySwitchService {
     if (this.keepalive) {
       var self = this;
       setInterval(function() {
-        self.platform.log.debug("IR Remote Switch keep alive");
+        self.platform.log.debug("IR Remote MomentarySwitch keep alive");
         self.device.call("miIO.ir_play", { freq: 38400, code: 'dummy' })
           .then(result => { self.platform.log.debug("SUCCESS"); })
           .catch(res => { self.platform.log.debug("FAIL"); })
