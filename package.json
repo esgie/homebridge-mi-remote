@@ -14,7 +14,7 @@
     "lights",
     "conditioner"
   ],
-  "license": "UNLICENSED",
+  "license": "WTFPL v2",
   "name": "homebridge-mi-remote",
-  "version": "0.3.7"
+  "version": "0.4.0"
 }
