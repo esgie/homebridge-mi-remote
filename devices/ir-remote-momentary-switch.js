@@ -9,11 +9,12 @@ MiRemoteMomentarySwitch = function(platform, config) {
 };
 
 class MiRemoteMomentarySwitchService {
-  constructor({config, platform, ip}) {
+  constructor({config, platform, ip, keepalive = false}) {
     const {name, token, data} = config;
     this.name = name;
     this.token = token;
     this.data = data;
+    this.keepalive = keepalive;
     this.platform = platform;
 
     this.readydevice = false;
@@ -25,6 +26,18 @@ class MiRemoteMomentarySwitchService {
 
     this.onoffstate = false;
     this.SwitchStatus;
+    
+    if (this.keepalive) {
+      var self = this;
+      setInterval(function() {
+        self.platform.log.debug("IR Remote Switch keep alive");
+        self.device.call("miIO.ir_play", { freq: 38400, code: 'dummy' })
+          .then(result => { self.platform.log.debug("SUCCESS"); })
+          .catch(res => { self.platform.log.debug("FAIL"); })
+        }, 60*1000);
+      }
+    }
+  
   }
 
   getServices() {
